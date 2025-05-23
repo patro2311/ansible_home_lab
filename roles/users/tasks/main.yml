@@ -1,0 +1,26 @@
+- name: Create standard_users
+  user:
+    name: "{{ item.name }}"
+    shell: "{{ item.shell }}"
+    home: "{{ item.home | default(omit) }}"
+    groups: "{{ item.group }}"
+    state: present
+  loop: "{{ all_users[0].standard_users }}"
+
+- name: Create admin_users
+  user:
+    name: "{{ item.name }}"
+    shell: "{{ item.shell }}"
+    groups: "{{ item.group }}"
+    state: present
+  loop: "{{ all_users[1].admin_users }}"
+
+- name: Create avengers_users
+  user:
+    name: "{{ item.name }}"
+    shell: "{{ item.shell }}"
+    home: "{{ item.home | default(omit) }}"
+    groups: "{{ item.group }}"
+    state: present
+  loop: "{{ all_users[2].avengers_users }}"
+

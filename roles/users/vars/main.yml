@@ -1,0 +1,68 @@
+all_users:
+- standard_users:
+    - name: tomas
+      shell: /bin/bash
+      home: "/home/tomas"
+      group: pobocka_KE
+  
+    - name: lubos
+      shell: /bin/bash
+      home: "/home/lubos"
+      group: pobocka_KE
+
+    - name: fero
+      shell: /bin/bash
+      home: "/home/fero"
+      group: pobocka_KE
+
+    - name: marian
+      shell: /bin/bash
+      home: "/home/marian"
+      group: pobocka_KE
+
+    - name: miro
+      shell: /bin/bash
+      home: "/home/miro"
+      group: pobocka_KE
+
+    - name: peto
+      shell: /bin/bash
+      home: "/home/peto"
+      group: pobocka_KE
+
+
+- admin_users: 
+    - name: patrik
+      shell: /bin/bash
+      group: "{{ 'wheel' if ansible_os_family == 'RedHat' else 'sudo' }}"
+    
+    - name: simon
+      shell: /bin/bash
+      group: "{{ 'wheel' if ansible_os_family == 'RedHat' else 'sudo' }}"
+
+
+- avengers_users:
+    - name: spiderman
+      shell: /bin/bash
+      home: "/home/spiderman"
+      group: avengers
+    
+    - name: hulk 
+      shell: /bin/bash
+      home: "/home/hulk"
+      group: avengers
+
+    - name: ironman
+      shell: /bin/bash
+      home: "/home/ironman"
+      group: avengers
+
+    - name: zeus
+      shell: /bin/bash
+      home: "/home/zeus"
+      group: avengers
+
+    - name: drstrange
+      shell: /bin/bash
+      home: "/home/drstange"
+      group: avengers

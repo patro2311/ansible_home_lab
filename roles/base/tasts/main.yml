@@ -1,0 +1,13 @@
+- name: Update repo-package (CentOS)
+  tags: always
+  package:
+    update_only: yes
+    update_cache: yes
+  when: ansible_os_family == "RedHat"
+ 
+- name: Update repo-package (Debian, Ubuntu)
+  package:
+    upgrade: dist
+    update_cache: yes
+  when: ansible_os_family in ["Debian","Ubuntu"]
+
