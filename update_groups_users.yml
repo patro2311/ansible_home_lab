@@ -4,5 +4,4 @@
     become: true
     roles:
       - base
-      - groups
-      - users 
+      - users

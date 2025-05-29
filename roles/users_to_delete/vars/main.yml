@@ -1,0 +1,15 @@
+delete_unwanted_users:
+  - standard_users:
+      - tomas
+      - lubos
+      - fero
+      - marian
+      - miro
+      - peto
+
+  - avengers_users:
+      - spiderman
+      - hulk
+      - ironman
+      - zeus
+      - drstrange

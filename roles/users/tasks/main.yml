@@ -1,4 +1,5 @@
 - name: Create standard_users
+  tags: standard_users
   user:
     name: "{{ item.name }}"
     shell: "{{ item.shell }}"
@@ -8,6 +9,7 @@
   loop: "{{ all_users[0].standard_users }}"
 
 - name: Create admin_users
+  tags: admin_users
   user:
     name: "{{ item.name }}"
     shell: "{{ item.shell }}"
@@ -15,7 +17,8 @@
     state: present
   loop: "{{ all_users[1].admin_users }}"
 
-- name: Create avengers_users
+- name: Create avengers_users 
+  tags: standard_users
   user:
     name: "{{ item.name }}"
     shell: "{{ item.shell }}"
