@@ -1,68 +1,120 @@
 all_users:
 - standard_users:
     - name: tomas
+      comment: "Moj kolaga"
       shell: /bin/bash
       home: "/home/tomas"
+      password: "{{ tomas_pw }}"
+      expire_date: "2025-12-31"
+      password_expire_days: 90
+      force_password_change: true
       group: pobocka_KE
   
     - name: lubos
       shell: /bin/bash
       home: "/home/lubos"
+      password: "{{ lubos_pw }}"
+      expire_date: "2025-12-31"
+      password_expire_days: 90
+      force_password_change: true
       group: pobocka_KE
 
     - name: fero
       shell: /bin/bash
       home: "/home/fero"
+      password: "{{ fero_pw }}"
+      expire_date: "2025-12-31"
+      password_expire_days: 90
+      force_password_change: true
       group: pobocka_KE
 
     - name: marian
       shell: /bin/bash
       home: "/home/marian"
+      password: "{{ marian_pw }}"
+      expire_date: "2025-12-31"
+      password_expire_days: 90
+      force_password_change: true
       group: pobocka_KE
 
     - name: miro
       shell: /bin/bash
       home: "/home/miro"
+      password: "{{ marian_pw }}"
+      expire_date: "2025-12-31"
+      password_expire_days: 90
+      force_password_change: true
       group: pobocka_KE
 
     - name: peto
       shell: /bin/bash
       home: "/home/peto"
+      password: "{{ peto_pw }}"
+      expire_date: "2025-12-31"
+      password_expire_days: 90
+      force_password_change: true
       group: pobocka_KE
 
 
 - admin_users: 
-    - name: patrik
+    - name: lukas
       shell: /bin/bash
+      comment: "New colegue"
       group: "{{ 'wheel' if ansible_os_family == 'RedHat' else 'sudo' }}"
-    
+      paswword_expire_days: 180
+      force_password_change: false
+
+
     - name: simon
       shell: /bin/bash
+      comment: "Ansible-robot"
       group: "{{ 'wheel' if ansible_os_family == 'RedHat' else 'sudo' }}"
-
+      
 
 - avengers_users:
     - name: spiderman
+      comment: "Superhero"
       shell: /bin/bash
       home: "/home/spiderman"
+      expire_date: "2025-12-31"
+      password_expire_days: 90
+      force_password_change: true
       group: avengers
     
     - name: hulk 
       shell: /bin/bash
+      comment: "Superhero"
       home: "/home/hulk"
+      expire_date: "2025-12-31"
+      password_expire_days: 90
+      force_password_change: true
       group: avengers
 
     - name: ironman
       shell: /bin/bash
+      comment: "Superhero"
       home: "/home/ironman"
+      expire_date: "2025-12-31"
+      password_expire_days: 90
+      force_password_change: true
       group: avengers
 
     - name: zeus
       shell: /bin/bash
+      comment: "Superhero"
       home: "/home/zeus"
+      expire_date: "2025-12-31"
+      password_expire_days: 90
+      force_password_change: true
       group: avengers
 
     - name: drstrange
       shell: /bin/bash
+      comment: "Superhero"
       home: "/home/drstange"
+      expire_date: "2025-12-31"
+      password_expire_days: 90
+      force_password_change: true
       group: avengers
+
+
