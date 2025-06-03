@@ -1,6 +1,0 @@
-- name: Create all necessary groups
-  group: 
-    name: "{{ item.group }}"
-    state: present
-  loop: "{{ all_groups }}"
-

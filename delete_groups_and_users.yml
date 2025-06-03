@@ -1,5 +1,0 @@
-- hosts: all
-  become: true
-  roles: 
-    - groups_to_delete
-    - users_to_delete

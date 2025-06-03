@@ -1,5 +1,0 @@
-- name: delete_unwanted_groups
-  group: 
-    name: "{{ item }}"
-    state: absent
-  loop: "{{ groups_to_delete }}"
