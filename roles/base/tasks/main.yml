@@ -1,0 +1,19 @@
+- name: Update OS (CentOS)
+  dnf:
+    update_cache: yes
+    update_only: yes
+  when: ansible_os_family == "RedHat"
+
+  
+- name: Copy simon sudoers file to sudoers.d directory
+  copy:
+    src: sudoers_simon
+    dest: /etc/sudoers.d/simon
+    owner: root
+    group: root
+    mode: 0440
+
+- name: Copy ssh-key for simon user
+  authorized_key:
+    user: simon
+    key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOo1JA/Cp9Bdxs0vVr6yd7urXYReA03h8VoU+Opf1Bxb ANSIBLE" 

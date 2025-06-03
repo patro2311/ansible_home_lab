@@ -1,0 +1,11 @@
+---
+
+  - hosts: all
+    become: true
+    vars_files:
+      - /home/patrik/ansible_home_lab/vars_files/password.yml
+
+    roles:
+      - groups
+      - users
+
