@@ -1,20 +1,31 @@
 - name: Create user for pobocka_KE
+  tags: KE
   user:
     name: "{{ item.name }}"
     shell: "{{ item.shell }}"
     comment: "{{ item.comment | default(omit) }}"
-    password: "{{ item.password | password_hash('sha512') }}"
-    password_expire_max: "{{ item.password_expire_max }}"
+    password_expire_max: "{{ item.password_expire_max | default(omit) }}"
   loop: "{{ all_users[0].pobocka_KE }}"
 
  
+- name:  Create user for Avengers
+  tags: AV
+  user:
+    name: "{{ item.name }}"
+    shell: "{{ item.shell }}"
+    groups: "{{ item.group }}"
+    password_expire_max: "{{ item.password_expire_max | default(omit) }}"
+  loop: "{{ all_users[2].avenger_users }}"
+
+
 - name: Create admin_users
+  tags: admin
   user:
     name: "{{ item.name }}"
     shell: "{{ item.shell }}"
     group: "{{ 'wheel' if ansible_os_family == 'RedHat' else 'sudo' }}"
     comment: "{{ item.comment | default(omit) }}"
-    password_expire_max: "{{ item.password_expire_max }}"
+    password_expire_max: "{{ item.password_expire_max | default(omit) }}"
   loop: "{{ all_users[1].admin_users }}"
 
 

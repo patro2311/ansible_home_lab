@@ -4,36 +4,31 @@ all_users:
         shell: /bin/bash
         comment: "Žido František"
         group: branch_ke
-        password: 123456
         password_expire_max: 90
      
       - name: Tomas
         shell: /bin/bash
         comment: "Čechovský Tomáš"
         group: branch_ke
-        password: 123456
         password_expire_max: 90
 
       - name: Marian
         shell: /bin/bash
         comment: "Marian Nigut"
-        group: branch_ke 
-        password: 123456
+        group: branch_ke
         password_exipre_max: 90
         
       - name: Miro
         shell: /bin/bash
         comment: "Miro Šoltes"
-        group: branch_ke 
-        password: 123456
-        password_expire_max: 90
+        group: branch_ke
+        password_exipre_max: 90
 
       - name: Peto
         shell: /bin/bash
         comment: "Peto Potočnak"
-        group: branch_ke  
-        password: 123456
-        password_expire_max: 90
+        group: branch_ke
+        password_exipre_max: 90
  
 
 
@@ -52,20 +47,20 @@ all_users:
       - name: Ironman
         shell: /bin/bash
         group: superhero
-        password_expire_max: 90
+        password_exipre_max: 90
       
       - name: THOR
         shell: /bin/bash
         group: superhero
-        password_expire_max: 90    
+        password_exipre_max: 90    
       
       - name: Hulk
         shell: /bin/bash
         group: superhero
-        password_expire_max: 90
+        password_exipre_max: 90
 
       - name: Spiderman
         shell: /bin/bash
         group: superhero
-        password_expire_max: 90
+        password_exipre_max: 90
       
