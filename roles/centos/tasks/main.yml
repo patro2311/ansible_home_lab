@@ -4,7 +4,16 @@
     name: httpd
     state: latest 
   when: ansible_os_family == "RedHat"
- 
+
+
+- name: Enable http protocol 
+  firewalld:
+    service: http
+    state: enabled
+    permanent: true
+    immediate: true
+  when: ansible_os_family == "RedHat"
+  
 - name: Start and enable httpd.service
   tags: httpd apache apache2
   service:
@@ -13,6 +22,11 @@
     enabled: yes
   when: ansible_os_family == "RedHat"
 
+- name: create a file named index.html
+  file:
+    path: /var/www/html/index.html
+    state: touch 
+    
 - name: Change the parameters in idex.html
   tags: httpd apache apache2
   lineinfile:
@@ -22,3 +36,13 @@
     firstmatch: yes
   when: ansible_os_family == "RedHat"
   notify: restart hhtpd
+
+- name: Generate template for SSH
+  tags: ssh
+  template:
+    src: sshd_config.j2
+    dest: /home/skuska.config
+    owner: root
+    group: patrik
+    mode: 0440
+  notify: restart sshd

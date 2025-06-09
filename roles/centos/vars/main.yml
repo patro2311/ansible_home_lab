@@ -1,0 +1,8 @@
+ssh_users: 
+  - patrik
+  - simon
+
+ssh_template_file: sshd_config.j2
+ 
+
+

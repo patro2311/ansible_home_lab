@@ -4,9 +4,5 @@
     become: true
 
     roles:
-      - base
-      - groups
-      - users
-      - centos
       - debian
 

@@ -1,9 +1,25 @@
+- name: Install necessary packages
+  tags: always
+  apt:
+    name: 
+      - rpm
+      - ufw
+    state: latest  
+  when: ansible_os_family in ["Debian", "Ubuntu"]
+
 - name: Install apache2 
   tags: httpd apache apache2
   apt: 
     name: apache2
     state: latest
   when: ansible_os_family in ["Debian", "Ubuntu"]
+
+- name: Enable UFW
+  tags: httpd http apache apache2
+  ufw:
+    proto: http, https
+    port: 80
+    rule: allow
 
 - name: Start & Enable apache2
   tags: httpd apache apache2
@@ -22,3 +38,5 @@
     line: "<title>Moja skusobna stranka webu</title>"
   when: ansible_os_family in ["Debian", "Ubuntu"]
   notify: restart apache2 
+
+

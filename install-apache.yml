@@ -1,0 +1,17 @@
+---
+
+- hosts: centosserver
+  become: true
+  roles:
+    - centos
+
+- hosts: debianserver
+  become: true
+  roles:
+    - centos
+
+- hosts: dbserver
+  become: true
+  roles:
+    - centos
+

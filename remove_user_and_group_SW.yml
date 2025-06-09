@@ -1,0 +1,61 @@
+---
+
+  - hosts: all
+    become: true
+    tasks:
+         
+    - name: remove users
+      user:
+        name: "{{ item }}"
+        state: absent
+        remove: yes
+      loop:       
+        - Frantisek
+        - Tomas
+        - Marian
+        - Miro
+        - Peto
+        - lukas
+        - Ironman
+        - THOR
+        - Hulk
+        - Spiderman
+
+    - name: remove groups
+      group:
+        name: "{{ item }}" 
+        state: absent
+      loop:
+        - branch_ke
+        - superhero
+        - admin      
+
+  - hosts: 192.168.0.33 
+    become: true
+    tasks:
+  
+    - name: Remove httpd  (CentOS)
+      dnf: 
+        name: httpd
+        state: absent
+
+
+  - hosts: 192.168.0.44
+    become: true 
+    tasks:
+
+    - name: Remove httpd  (db-server)
+      dnf:
+        name: httpd
+        state: absent
+        
+  - hosts: 192.168.0.55
+    become: true
+    tasks:
+
+    - name: Remove apache2 (Debian)
+      apt:
+        name: apache2
+        state: absent
+  
+ 
