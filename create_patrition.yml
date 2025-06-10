@@ -1,0 +1,45 @@
+---
+
+  - hosts: all
+    become: true
+    tasks: 
+    
+    - name: Confirm that partition exist 
+      stat:
+        path: /dev/sdc
+      register: patrition_exist
+    
+    - name: Fail, if partition Doesn't exist
+      fail: 
+        msg: "naaaah, doesn't exist"
+      when: patrition_exist.stat.exists == false
+  
+    - name: Create a partition 
+      parted:
+        name: ansible1part
+        label: gpt
+        device: /dev/sdc
+        number: 1
+        part_start: 1MiB
+        part_end: 1.9GiB
+        state: present
+      when: patrition_exist.stat.exists == true
+ 
+    - name: format partition 
+      filesystem: 
+        dev: /dev/sdc1
+        fstype: xfs
+
+    - name: Create a mount point for Partition 
+      file:
+        path: /data
+        state: directory
+ 
+    - name: Mount it 
+      mount: 
+        src: /dev/sdc1
+        path: /data
+        fs_type: xfs
+        state: mounted
+
+

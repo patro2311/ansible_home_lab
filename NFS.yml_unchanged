@@ -1,0 +1,102 @@
+---
+  - name: INSTALATION NFS AS A SERVER 
+    hosts: centosserver
+    become: true
+    tasks:
+   
+    - name: INSTALL NFS-UTILS
+      dnf:
+        name:
+          - nfs-utils
+          - rpcbind
+          - libnfsidmap
+        state: present
+      when: ansible_distribution == "CentOS"
+
+    - name: START the NFS-SERVER
+      service:
+        name: nts-server
+        state: started
+        enabled: yes
+      when: ansible_distribution == "CentOS"
+
+    - name: START the RPCBIND
+      service:
+        name: rpcbind
+        state: started
+        enabled: yes
+      when: ansible_distribution == "CentOS"
+
+    - name: START the RPC-STATD
+      service:
+        name: rpc-statd
+        state: started
+
+    - name: START the nfs-idmapd
+      servcice: 
+        name: nfs-idmapd
+        state: started
+
+    
+    - name: CREATE a DIR for SHARING 
+      file:
+        path: /shares
+        owner: root
+        group: root
+        mode: 0777
+        state: directory
+
+    - name: MODY /etc/exports
+      blockinfile:
+        path: /etc/exports
+        block: "/shares     *(rw,sync,no_root_squash)"
+
+    - name: EXPORT the NFS SYSTEM
+      shell:
+        commands: exports -rv
+
+  
+    - name: CHANGE THE FIREWALL 2049 TCP
+      firewalld:
+      port: 2049/tcp
+      state: present
+      permanent: true
+
+    - name: CHANGE THE FIREWALL 2049 UDP
+      firewalld:
+        port: "{{ item }}"2049/udp
+        state: present
+        permanent: true
+      loop: 
+        - 2049/tcp
+        - 2049/udp
+        - 111/tcp
+        - 111/udp
+        - 32767/tcp
+        - 32767/udp
+    - name: CHANGE THE FIREWALL 111 TCP
+      firewalld:
+        port: 111/tcp
+        permanent: true
+        state: present
+
+    - name: CHANGE THE FIREWALL 111 UDP
+      firewalld:
+        port: 111/ucp
+        permanent: true
+        state: present
+
+    - name: CHANGE THE FIREWALL 32767 TCP
+      firewalld:
+        port: 32767/tcp
+        permanent: true
+        state: present
+   
+    - name: CHANGE THE FIREWALL 32767 udp
+      firewalld:
+        port: 32767/tcp
+        permanent: true
+        state: present
+
+    
+        

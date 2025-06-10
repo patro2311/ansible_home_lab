@@ -1,0 +1,134 @@
+---
+  - name: INSTALATION NFS AS A SERVER 
+    hosts: centosserver
+    become: true
+    tasks:
+   
+    - name: INSTALL NFS-UTILS
+      tags: cent
+      dnf:
+        name:
+          - nfs-utils
+          - rpcbind
+          - libnfsidmap
+        state: present
+      when: ansible_distribution == "CentOS"
+
+    - name: START the NFS-SERVER
+      tags: cent
+      service:
+        name: nfs-server 
+        state: started
+        enabled: yes
+      when: ansible_distribution == "CentOS"
+
+    - name: START the RPCBIND
+      tags: cent
+      service:
+        name: rpcbind
+        state: started
+        enabled: yes
+      when: ansible_distribution == "CentOS"
+
+    - name: START the RPC-STATD
+      tags: cent
+      service:
+        name: rpc-statd
+        state: started
+
+    - name: START the nfs-idmapd 
+      tags: cent
+      service: 
+        name: nfs-idmapd
+        state: started
+
+    
+    - name: CREATE a DIR for SHARING 
+      tags: cent
+      file:
+        path: /shares
+        owner: root
+        group: root
+        mode: 0777
+        state: directory
+
+    - name: MODY /etc/exports
+      tags: cent
+      blockinfile:
+        path: /etc/exports
+        block: "/shares     *(rw,sync,no_root_squash)"
+
+    - name: EXPORT the NFS SYSTEM
+      tags: cent
+      shell: exportfs -rv
+
+    - name: CHANGE THE FIREWALL 
+      tags: cent
+      firewalld:
+        port: "{{ item }}"
+        state: enabled
+        permanent: true
+      loop: 
+        - 2049/tcp
+        - 2049/udp
+        - 111/tcp
+        - 111/udp
+        - 32767/tcp
+        - 32767/udp
+     
+
+    - name: Change the parameter for nfs.conf
+      tags: cent
+      blockinfile:
+        path: /etc/nfs.conf
+        marker: "# {mark}"
+        block: |
+         [mountd]
+          port=32767
+       
+    - name: restart services 
+      tags: cent
+      service:
+        name: "{{ item }}"
+        state: restarted
+      loop:
+        - firewalld
+        - nfs-server
+        - rpcbind
+ 
+
+    
+  - name: INSTALL NFS as A CLIENT
+    hosts: dbserver
+    become: true
+    tasks: 
+
+    - name: install nfs-utils and rpcbind
+      tags: db
+      dnf:
+       name:
+         - nfs-utils
+         - rpcbind
+
+    - name: Create MOUNT POINT 
+      tags: db
+      file: 
+        path: /data
+        state: directory
+
+    - name: Mount IT
+      tags: db
+      mount:
+        path: /data
+        src: 192.168.0:33:/shares
+        opts: rw,sync
+        fstype: xfs
+        state: mounted
+    
+
+
+
+                  
+ 
+
+        

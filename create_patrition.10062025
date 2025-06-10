@@ -1,0 +1,43 @@
+---
+
+  - hosts: 192.168.0.44
+    become: true
+    tasks: 
+   
+    - name: Ensure that disk exist
+      stat:
+        path: /dev/sdc
+      register: disk_part
+    
+    - name: Fail if disk doesn't exist
+      fail: 
+        msg: "Disk doesn't exist"
+      when: disk_part.stat.exists == false
+
+    - name: Create a partition
+      parted:
+        name: Sec01
+        label: gpt
+        device: /dev/sdc
+        number: 1
+        state: present
+        part_start: 1MiB
+        part_end: 1.8GiB
+      when: disk_part.stat.exists == true
+
+    - name: Set a file system
+      filesystem:
+        dev: /dev/sdc1
+        fstype: xfs
+ 
+    - name: Creat a mounting point 
+      file: 
+       path: /mnt/apps
+       state: directory
+
+    - name: mount the partition
+      mount: 
+        path: /mnt/apps 
+        src: /dev/sdc1
+        fstype: xfs
+        state: mounted
