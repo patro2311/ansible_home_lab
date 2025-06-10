@@ -2,8 +2,9 @@
   tags: KE
   user:
     name: "{{ item.name }}"
-    shell: "{{ item.shell }}"
-    comment: "{{ item.comment | default(omit) }}"
+    shell: "{{ item.shell | default('/bin/bash') }}"
+    comment: "{{ item.comment | default('omit') }}"
+    password: "{{ item.password | hash('sha512') }}"
     password_expire_max: "{{ item.password_expire_max | default(omit) }}"
   loop: "{{ all_users[0].pobocka_KE }}"
 

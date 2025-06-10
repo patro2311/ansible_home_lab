@@ -46,3 +46,24 @@
     group: patrik
     mode: 0440
   notify: restart sshd
+  
+
+- name: Change the parameter PermitEmptyLogin
+  lineinfile:
+    path: /home/skuska.config
+    regexp: '#PermitEmptyPasswords no'
+    line: "PermitEmptyPasswords yes"
+  when: ansible_os_family == "RedHat"
+  notify: restart sshd
+
+
+- name: Change the parameter Port
+  lineinfile:
+    path: /home/skuska.config
+    regexp: '#Port 22'
+    line: "Port 2022"
+  when: ansible_os_family == "RedHat"
+  notify: restart sshd
+
+
+

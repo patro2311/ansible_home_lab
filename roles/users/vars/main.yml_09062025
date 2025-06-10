@@ -3,32 +3,37 @@ all_users:
       - name: Frantisek
         shell: /bin/bash
         comment: "Žido František"
-        password: "{{ Frantisek }}"
         group: branch_ke
+        password: 123456
+        password_expire_max: 90
      
       - name: Tomas
         shell: /bin/bash
         comment: "Čechovský Tomáš"
-        password: "{{ Frantisek }}"
         group: branch_ke
+        password: 123456
+        password_expire_max: 90
 
       - name: Marian
         shell: /bin/bash
-        comment: "Marian Nigut" 
-        password: "{{ Frantisek }}"
+        comment: "Marian Nigut"
         group: branch_ke 
+        password: 123456
+        password_exipre_max: 90
         
       - name: Miro
         shell: /bin/bash
         comment: "Miro Šoltes"
-        password: "{{ Miro | default(omit) }}"
         group: branch_ke 
+        password: 123456
+        password_expire_max: 90
 
       - name: Peto
         shell: /bin/bash
         comment: "Peto Potočnak"
-        password: "{{ Peto | default(omit) }}"
         group: branch_ke  
+        password: 123456
+        password_expire_max: 90
  
 
 
