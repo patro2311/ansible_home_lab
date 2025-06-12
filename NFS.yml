@@ -60,7 +60,7 @@
 
     - name: EXPORT the NFS SYSTEM
       tags: cent
-      shell: exportfs -rv
+      shell: exportfs -v
 
     - name: CHANGE THE FIREWALL 
       tags: cent
@@ -120,9 +120,9 @@
       tags: db
       mount:
         path: /data
-        src: 192.168.0:33:/shares
+        src: 192.168.0.33:/shares
         opts: rw,sync
-        fstype: xfs
+        fstype: nfs
         state: mounted
     
 
