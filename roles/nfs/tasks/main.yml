@@ -1,0 +1,87 @@
+- name: INSTALL NFS nececcery packages
+  tags: nfs
+  dnf:
+    name:
+      - nfs-utils
+      - rpcbind
+      - libnfsidmap
+    state: present
+  when: ansible_distribution == "CentOS"
+
+- name: START the NFS-SERVER
+  tags: nfs
+  service:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  loop: 
+    - nfs-server
+    - rpcbind
+  when: ansible_distribution == "CentOS"
+
+
+- name: START the RPC-STATD
+  tags: nfs
+  service:
+    name: "{{ item  }}"
+    state: started
+  loop: 
+    - rpc-statd
+    - nfs-idmapd
+  when: ansible_distribution == "CentOS"
+
+
+- name: CREATE a DIR for NFS-SHARING
+  tags: nfs
+  file:
+    path: /shares
+    owner: root
+    group: root
+    mode: 0777
+    state: directory
+
+- name: MODIFY /etc/exports
+  tags: nfs
+  blockinfile:
+    path: /etc/exports
+    block: "/shares     *(rw,sync,no_root_squash)"
+
+- name: EXPORT the NFS SYSTEM
+  tags: nfs
+  shell: exportfs -v
+
+
+- name: CHANGE THE FIREWALL
+  tags: firewald nfs
+  firewalld:
+    port: "{{ item }}"
+    state: enabled
+    permanent: true
+  loop:
+    - 2049/tcp
+    - 2049/udp
+    - 111/tcp
+    - 111/udp
+    - 32767/tcp
+    - 32767/udp
+
+
+- name: Change the parameter for nfs.conf
+  tags: cent
+  blockinfile:
+    path: /etc/nfs.conf
+    marker: "# {mark}"
+    block: |
+     [mountd]
+      port=32767
+
+- name: restart services
+  tags: cent
+  service:
+    name: "{{ item }}"
+    state: restarted
+  loop:
+    - firewalld
+    - nfs-server
+    - rpcbind
+

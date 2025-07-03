@@ -1,0 +1,22 @@
+- name: install nfs-utils and rpcbind
+  tags: nfs
+  dnf:
+    name:
+      - nfs-utils
+      - rpcbind
+
+- name: Create MOUNT POINT
+  tags: nfs
+  file:
+    path: /data
+    state: directory
+
+- name: Mount IT
+  tags: nfs
+  mount:
+    path: /data
+    src: 192.168.0.225:/shares
+    opts: rw,sync
+    fstype: nfs
+    state: mounted
+

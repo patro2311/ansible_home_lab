@@ -2,12 +2,14 @@
   tags: KE
   user:
     name: "{{ item.name }}"
+    home: "{{ item.home | default('/home/default') }}"
     shell: "{{ item.shell | default('/bin/bash') }}"
     comment: "{{ item.comment | default('omit') }}"
-    password: "{{ item.password | hash('sha512') }}"
+    update_password: always
+    password: "{{ item.password | password_hash('sha512') }}"
     password_expire_max: "{{ item.password_expire_max | default(omit) }}"
   loop: "{{ all_users[0].pobocka_KE }}"
-
+  no_log: true
  
 - name:  Create user for Avengers
   tags: AV
@@ -17,7 +19,8 @@
     groups: "{{ item.group }}"
     password_expire_max: "{{ item.password_expire_max | default(omit) }}"
   loop: "{{ all_users[2].avenger_users }}"
-
+  no_log: true
+  
 
 - name: Create admin_users
   tags: admin
@@ -28,7 +31,7 @@
     comment: "{{ item.comment | default(omit) }}"
     password_expire_max: "{{ item.password_expire_max | default(omit) }}"
   loop: "{{ all_users[1].admin_users }}"
-
+  no_log: true
 
 - name: Force to change the password for a pobocka_KE
   command: chage -d 0 "{{ item.name }}"
