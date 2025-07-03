@@ -1,0 +1,64 @@
+- name: Update OS cache
+  tags: always
+  dnf:
+    update_cache: yes
+    update_only: yes
+when: ansible_distribution == "CentOS"
+
+- name: Install MariaDB
+  tags: mariadb dbserver
+  dnf:
+    - mariadb-server
+    - mariadb
+    state: latest
+  when: ansible_distribution == "CentOS"
+   
+- name: Start and Enable MariaDB
+  tags: mariadb dbserver
+  service:
+    name: mariadb
+    state: started
+    enabled: yes
+
+
+- name:  Set root password for MariaDB
+  tags: mariadb dbserver
+  maysql_user: 
+    login_user: root
+    login password: ''
+    user: root
+    password: "{{ mariadb_root_password }}"
+    host_all: true
+    ingore_errors: yes
+
+- name: remove anonnymous users
+  tags: mariadb dbserver
+  mysql_user:
+    name: ''
+    host_all: all
+    state: apsent
+    login_user: root
+    login_password: "{{ mariadb_root_password }}"
+
+- name: Remove a TEST DATABASE
+  mysql_db: 
+    name: ''
+    state: absent
+    login_user: root
+    login_password: "{{ mariadb_root_password }}"
+
+- name: Create a new DATABASE for ANSIBLE-SEMAPHORE
+  mysql_db:
+    name: "{{ mariadb_database }}"
+    state: present
+    login_user: root
+    login_password: "{{ mariadb_root_password }}"
+
+- name: Create a new user with privileges
+  mysql_user:
+    name: "{{ mariadb_user }}"
+    password: "{{ mariadb_user_password }}"
+    priv: "{{ mariadb_database }}.*:ALL"
+    state: present
+    login_user: root
+    login_password: "{{ mariadb_root_password }}"
