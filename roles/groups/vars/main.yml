@@ -1,4 +1,4 @@
-all_groups:
-  - group: branch_ke
-  - group: superhero
-  - group: admin
+standard_group:
+  - group: branch_KE
+  - group: branch_ZV
+  

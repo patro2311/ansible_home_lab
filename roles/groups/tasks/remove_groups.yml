@@ -1,5 +1,5 @@
-- name: Create a group for Branch_KE Branch_ZV
+- name: Remove a group for Branch_KE Branch_ZV
   group:
     name: "{{ item.group }}" 
-    state: present
+    state: absent
   loop: "{{ standard_group }}"

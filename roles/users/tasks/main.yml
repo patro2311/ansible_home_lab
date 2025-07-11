@@ -1,40 +1,34 @@
-- name: Create user for pobocka_KE
-  tags: KE
+- name: Create a users for BRANCH_KE
+  tags: KE branch_ke
   user:
-    name: "{{ item.name }}"
+    name:  "{{ item.name }}"
     home: "{{ item.home | default('/home/default') }}"
-    shell: "{{ item.shell | default('/bin/bash') }}"
+    shell: "{{ item.shell | default('omit') }}"
     comment: "{{ item.comment | default('omit') }}"
-    update_password: always
+    group: "{{ item.group }}"
     password: "{{ item.password | password_hash('sha512') }}"
-    password_expire_max: "{{ item.password_expire_max | default(omit) }}"
-  loop: "{{ all_users[0].pobocka_KE }}"
-  no_log: true
+    update_password: on_create
+    password_expire_max: "{{ item.password_expire_max | default('omit') }}"
+  loop: "{{ standard_user[0].branch_KE }}"
+
  
-- name:  Create user for Avengers
-  tags: AV
+- name: Create a users for BRANCH_ZV
+  tags: ZV branch_zv
   user:
-    name: "{{ item.name }}"
-    shell: "{{ item.shell }}"
-    groups: "{{ item.group }}"
-    password_expire_max: "{{ item.password_expire_max | default(omit) }}"
-  loop: "{{ all_users[2].avenger_users }}"
-  no_log: true
-  
+    name:  "{{ item.name }}"
+    home: "{{ item.home | default('/home/default') }}"
+    shell: "{{ item.shell | default('omit') }}"
+    comment: "{{ item.comment | default('omit') }}"
+    group: "{{ item.group }}"
+    password: "{{ item.password | password_hash('sha512') }}"
+    update_password: on_create
+    password_expire_max: "{{ item.password_expire_max | default('omit') }}"
+  loop: "{{ standard_user[1].branch_ZV }}"
 
-- name: Create admin_users
-  tags: admin
-  user:
-    name: "{{ item.name }}"
-    shell: "{{ item.shell }}"
-    group: "{{ 'wheel' if ansible_os_family == 'RedHat' else 'sudo' }}"
-    comment: "{{ item.comment | default(omit) }}"
-    password_expire_max: "{{ item.password_expire_max | default(omit) }}"
-  loop: "{{ all_users[1].admin_users }}"
-  no_log: true
 
-- name: Force to change the password for a pobocka_KE
+- name: Force to change password for first login
   command: chage -d 0 "{{ item.name }}"
-  loop: "{{ all_users[0].pobocka_KE }}"
+  loop: "{{ standard_user[0].branch_KE }}"
 
 
+    

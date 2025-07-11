@@ -1,4 +1,0 @@
-mariadb_root_password: 'A2*pP3144'
-mariadb_database: 'SemaforDB'
-mariadb_user: 'ansible'
-mariadb_user_password: 'cokolada12345'

@@ -1,66 +1,58 @@
-all_users:
-  - pobocka_KE:
-      - name: Frantisek
+standard_user:
+  - branch_KE:
+      - name: Tomas_Cechovsky
         shell: /bin/bash
-        comment: "Žido František"
-        password: "{{ Frantisek }}"
-        group: branch_ke
-     
-      - name: Tomas
-        shell: /bin/bash
-        comment: "Čechovský Tomáš"
-        password: "{{ Frantisek }}"
-        group: branch_ke
+        home: /home/cechovsky
+        group: branch_KE
+        comment: "Tomas Čechovský"
+        password: "{{ Tomas_Cechovsky }}"
+        password_expire_max: 90         
 
-      - name: Marian
+      - name: Fero_Zido
         shell: /bin/bash
-        comment: "Marian Nigut" 
-        password: "{{ Frantisek }}"
-        group: branch_ke 
-        
-      - name: Miro
-        shell: /bin/bash
-        comment: "Miro Šoltes"
-        password: "{{ Miro | default(omit) }}"
-        group: branch_ke 
-
-      - name: Peto
-        shell: /bin/bash
-        comment: "Peto Potočnak"
-        password: "{{ Peto | default(omit) }}"
-        group: branch_ke  
+        home: /home/zido
+        group: branch_KE
+        comment: "František Žido"
+        password: "{{ Fero_Zido }}"
+        password_expire_max: 90
  
-
-
-  - admin_users:
-      - name: lukas
+      - name: Marian_Nigut
+        home: /home/nigut
         shell: /bin/bash
-        comment: "user for Ansible"
-        password_expire_max: 180
-      
-      - name: patrik
-        shell: /bin/bash
-        comment: "Test user, Ansible-practice"
-        
-  
-  - avenger_users:
-      - name: Ironman
-        shell: /bin/bash
-        group: superhero
-        password_expire_max: 90
-      
-      - name: THOR
-        shell: /bin/bash
-        group: superhero
-        password_expire_max: 90    
-      
-      - name: Hulk
-        shell: /bin/bash
-        group: superhero
+        group: branch_KE 
+        comment: "Marian Nigut"
+        password: "{{ Marian_Nigut }}"
         password_expire_max: 90
 
-      - name: Spiderman
+      - name: Anton_Cruis
+        home: /home/cruis
         shell: /bin/bash
-        group: superhero
+        group: branch_KE
+        comment: "Anton Cruis"
+        password: "{{ Anton_Cruis }}"
         password_expire_max: 90
-      
+   
+      - name: Miroslav_Soltes
+        home: /home/soltes
+        shell: /bin/bash
+        group: branch_KE
+        comment: "Miroslav Šoltes"
+        password: "{{ Miroslav_Soltes }}"
+        password_expire_max: 90      
+ 
+  - branch_ZV:
+      - name: Rado_Longauver
+        home: /home/longauver
+        shell: /bin/bash
+        comment: "Radislav Lonagaver"
+        group: branch_ZV 
+        password: "{{ Rado_Longauver }}"
+        password_expire_max: 90
+
+      - name: Lukas_Longauver
+        home: /home/Llongauver
+        shell: /bin/bash
+        comment: "Lukáš Lonagaver"
+        group: branch_ZV
+        password: "{{ Lukas_Longauver }}" 
+        password_expire_max: 90

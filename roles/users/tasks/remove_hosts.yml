@@ -1,0 +1,14 @@
+- name: Remove a users for BRANCH_KE
+  tags: KE branch_ke
+  user:
+    name:  "{{ item.name }}"
+    state: absent
+  loop: "{{ standard_user[0].branch_KE }}"
+
+ 
+- name: Remove a users for BRANCH_ZV
+  tags: ZV branch_zv
+  user:
+    name:  "{{ item.name }}"
+    state: absent
+  loop: "{{ standard_user[1].branch_ZV }}"

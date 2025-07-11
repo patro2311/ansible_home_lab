@@ -74,6 +74,7 @@
         - 111/udp
         - 32767/tcp
         - 32767/udp
+
     - name: CHANGE THE FIREWALL 111 TCP
       firewalld:
         port: 111/tcp
