@@ -1,0 +1,40 @@
+- name: Install apache SERVER for CentOS server
+  package: 
+    name: httpd
+    state: present
+  when: ansible_distribution == "CentOS"
+  
+- name: Start Apache Server
+  service:
+    name: httpd
+    state: started
+    enabled: yes
+
+- name: Change the port number of APACHE server
+  lineinfile:
+    path: /var/www/html/index.html
+    regexp: '<title>Web-site test</title>'
+    line: <title>Testovacia-strana test</title>
+  notify: restart httpd
+
+- name:  Change the FIREWALL protocol
+  firewalld:
+    service: "{{ item }}"
+    state: enabled
+    permanent: true
+  loop:
+    - http
+    - https
+  notify: restart firewall
+
+- name: Change the FIREWALL ports
+  firewalld:
+    port: "{{ item }}"
+    state: enabled
+    permanent: true
+  loop: 
+    - 80/tcp
+    - 443/tcp
+  notify: restart firewall
+
+ 
