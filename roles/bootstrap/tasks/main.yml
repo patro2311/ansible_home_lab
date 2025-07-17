@@ -1,8 +1,11 @@
-- name: create user ansible_user for ansible-host
+- name: create user ansible_user 
   user:
-    name: ansible_user
+    name: "{{ item  }}"
     group: "{{ 'wheel' if  ansible_distribution == 'CentOS' else 'sudo' }}"
     state: present
+  loop: 
+    - ansible_user
+    - patrik 
 
 - name: copy a sudoers file for user ansible_user
   copy:
@@ -17,10 +20,27 @@
     user: ansible_user
     key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHvu1jvvEFzVMtJ7plK0zQrXyT141DK9Tjd/RDbXC6db Ansible"
 
-- name: Deploy SSHD config
+- name: Copy ssh-key for user Patrik
+  authorized_key:
+    user: patrik
+    key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEa9vmRhqRnKkgmGTAUc6zdhHAvHyZBWdaOsLeSQwecj Patrik_Default"
+
+- name: Deploy SSHD config (CentOS)
   template:
     src: sshd_config_centos.j2
     dest: /etc/ssh/sshd_config
     owner: root
     group: root
     mode: 0600
+  when: ansible_distribution == "CentOS"
+  notify: restart sshd
+
+- name: Deploy ssh_config (Debian, Ubuntu)
+  template:
+    src: sshd_config_debian.j2
+    dest: /etc/ssh/sshd_config
+    owner: root
+    group: root
+    mode: 0600
+  when: ansible_distribution in ["Debian", "Ubuntu"]
+  notify: restart sshd
