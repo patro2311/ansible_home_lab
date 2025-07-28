@@ -15,6 +15,14 @@
     owner: root
     mode: 0440
 
+- name: Copy a sudoers file for user patrik
+  copy:
+    src: patrik_sudoers
+    dest: /etc/sudoers.d/patrik
+    group: root
+    owner: root
+    mode: 0440
+
 - name: Copy ssh-key for a user
   authorized_key:
     user: ansible_user

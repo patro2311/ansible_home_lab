@@ -124,14 +124,13 @@ Subsystem	sftp	/usr/lib/openssh/sftp-server
 #
 #tLogin {{ permit_login_root }}
 
-#Only allow specific users to SSH in 
+# Only allow specific users to SSH in 
 AllowUsers {{ ssh_users }}
 
-
-#Disable password-based login
+# Disable password-based login
 PasswordAuthentication no
 
-#Disable Empty password
+# Disable Empty password
 PermitEmptyPasswords no
 
 # Disable challenge-response and keyboard-interactive logins
@@ -143,22 +142,10 @@ PubkeyAuthentication yes
 
 # Disable X11 forwarding unless needed
 X11Forwarding no
-# Default: disable agent and TCP forwarding
 AllowAgentForwarding no
 AllowTcpForwarding no
 PermitTunnel no
 X11Forwarding no
-
-# Disable TCP forwarding unless needed "we are using jump-hosts"
-AllowTcpForwarding no
-# ===== Match block to allow forwarding for specific users =====
-Match User {{ ssh_users }}
-    AllowAgentForwarding yes
-    AllowTcpForwarding yes
-    PermitTunnel yes
-
-# Disable agent forwarding | SSH agent forwarding allows you to use your local SSH keys (stored in your SSH agent) on a remote system. This is useful if you want to connect to a second server from the first server, without copying your private keys to that first server. This is often done for security reasons, because if the remote server is compromised, the attacker could potentially use the forwarded agent to access other systems without needing the actual private key.
-AllowAgentForwarding no
 
 # Log everything
 LogLevel VERBOSE
