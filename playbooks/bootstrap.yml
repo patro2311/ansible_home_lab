@@ -1,6 +1,0 @@
----
-
-  - name: BOOTSTRAP
-    hosts: all
-    roles:
-      - base

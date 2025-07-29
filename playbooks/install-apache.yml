@@ -1,6 +1,0 @@
----
-
-- hosts: centosserver
-  become: true
-  roles:
-    - centos

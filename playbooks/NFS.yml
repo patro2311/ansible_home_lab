@@ -55,16 +55,9 @@
       shell:
         commands: exports -rv
 
-  
-    - name: CHANGE THE FIREWALL 2049 TCP
+    - name: CHANGE THE FIREWALL for NFS
       firewalld:
-      port: 2049/tcp
-      state: present
-      permanent: true
-
-    - name: CHANGE THE FIREWALL 2049 UDP
-      firewalld:
-        port: "{{ item }}"2049/udp
+        port: "{{ item }}"
         state: present
         permanent: true
       loop: 
@@ -75,29 +68,6 @@
         - 32767/tcp
         - 32767/udp
 
-    - name: CHANGE THE FIREWALL 111 TCP
-      firewalld:
-        port: 111/tcp
-        permanent: true
-        state: present
-
-    - name: CHANGE THE FIREWALL 111 UDP
-      firewalld:
-        port: 111/ucp
-        permanent: true
-        state: present
-
-    - name: CHANGE THE FIREWALL 32767 TCP
-      firewalld:
-        port: 32767/tcp
-        permanent: true
-        state: present
-   
-    - name: CHANGE THE FIREWALL 32767 udp
-      firewalld:
-        port: 32767/tcp
-        permanent: true
-        state: present
 
     
         
