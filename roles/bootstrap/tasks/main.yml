@@ -33,6 +33,11 @@
     user: patrik
     key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEa9vmRhqRnKkgmGTAUc6zdhHAvHyZBWdaOsLeSQwecj Patrik_Default"
 
+- name: Copy ssh-key for Macbook
+  authorized_key:
+    user: macbook
+    key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJuRGKJpnVIAUhOrydtT3B/nFwVmucZ9E06AV0uRilTX Patrik_MacBook"
+
 - name: Deploy SSHD config (CentOS)
   template:
     src: sshd_config_centos.j2

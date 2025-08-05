@@ -1,0 +1,15 @@
+public_port_services:
+  - 80/tcp 
+  - 111/tcp 
+  - 443/tcp
+  - 2049/tcp
+  - 32767/tcp
+  - 111/udp
+  - 2049/udp
+  - 32767/udp
+
+public_services:
+  - cockpit 
+  - dhcpv6-client
+  - http
+  - https

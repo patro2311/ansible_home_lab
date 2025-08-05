@@ -1,0 +1,11 @@
+- name: restart firewalld
+  service: 
+    name: firewalld
+    state: restarted
+  when: ansible_distribution == "CentOS"
+
+- name: restart ufw
+  service:
+    name: ufw
+    state: restarted
+  when: ansible_distribution == "Debian"
