@@ -1,5 +1,0 @@
-- name: Include tasks for debian
-  include_tasks: debian/main.yml
-
-- name: Include tasks for centos
-  include_tasks: centos/main.yml

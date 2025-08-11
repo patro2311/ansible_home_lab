@@ -1,7 +1,0 @@
----
- 
-  - name: Change the firewalld for CentOS
-    hosts: all
-    become: true
-    roles:
-      - security

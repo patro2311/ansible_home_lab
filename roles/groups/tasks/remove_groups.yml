@@ -1,5 +1,0 @@
-- name: Remove a group for Branch_KE Branch_ZV
-  group:
-    name: "{{ item.group }}" 
-    state: absent
-  loop: "{{ standard_group }}"

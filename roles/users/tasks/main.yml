@@ -1,34 +1,27 @@
-- name: Create a users for BRANCH_KE
-  tags: KE branch_ke
+- name: Create a user for branch_KE
+  tags: branch_KE KE ke 
   user:
-    name:  "{{ item.name }}"
+    name: "{{ item.name }}"
+    shell: "{{ item.shell | default'(omit)' }}"
     home: "{{ item.home | default('/home/default') }}"
-    shell: "{{ item.shell | default('omit') }}"
-    comment: "{{ item.comment | default('omit') }}"
     group: "{{ item.group }}"
-    password: "{{ item.password | password_hash('sha512') }}"
-    update_password: on_create
-    password_expire_max: "{{ item.password_expire_max | default('omit') }}"
+    password: "{{ item.password }}"
+    password_expire_max: "{{ item.password_expire_max }}"
   loop: "{{ standard_user[0].branch_KE }}"
 
- 
-- name: Create a users for BRANCH_ZV
-  tags: ZV branch_zv
+- name: Create a user for branch_ZV
+  tags: branch_ZV ZV zv 
   user:
-    name:  "{{ item.name }}"
+    name: "{{ item.name }}"
+    shell: "{{ item.shell | default'(omit)' }}"
     home: "{{ item.home | default('/home/default') }}"
-    shell: "{{ item.shell | default('omit') }}"
-    comment: "{{ item.comment | default('omit') }}"
     group: "{{ item.group }}"
-    password: "{{ item.password | password_hash('sha512') }}"
-    update_password: on_create
-    password_expire_max: "{{ item.password_expire_max | default('omit') }}"
+    password: "{{ item.password }}"
+    password_expire_max: "{{ item.password_expire_max }}"
   loop: "{{ standard_user[1].branch_ZV }}"
 
-
-- name: Force to change password for first login
-  command: chage -d 0 "{{ item.name }}"
-  loop: "{{ standard_user[0].branch_KE }}"
-
-
-    
+- name: Force to change password in the frist login 
+  tags: change_password
+  command: "chage -d 0 {{ item.name }}"
+  loop: "{{ standard_user[1].branch_ZV }}"
+  when: item.password_expire_max is defined and item.password_expire_max > 0

@@ -1,2 +1,0 @@
-permit_login_root: no
-ssh_users: ansible_user patrik 
