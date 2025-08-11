@@ -1,0 +1,19 @@
+- name: Allow SSH,HTTPS access
+  ansible.builtin.firewalld:
+    service: "{{ item }}" 
+    permanent: true
+    state: enabled
+  when: ansible_facts['distribution'] == 'CentOS'
+  loop: 
+    - ssh 
+    - https   
+
+- name: Allow port 8080 and https 443
+  ansible.builtin.firewalld:
+    port: "{{ item }}"
+    permanent: true
+    state: enabled
+  loop:
+    - 8080/tcp
+    - 443/tcp
+  when?: ansible_facts['distribution'] == 'CentOS'

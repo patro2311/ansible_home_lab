@@ -1,0 +1,8 @@
+- name: Include tasks for Debian firewall configuration
+  include_tasks: deiban/tasks/main.yml
+  when: ansible_distibution in ['Debian', 'Ubuntu']
+
+- name: Include tasks for CentOS firewall configuration
+  include_tasks: centos/tasks/main.yml
+  when: ansible_distribution == 'CentOS'
+
