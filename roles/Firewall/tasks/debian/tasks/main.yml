@@ -39,7 +39,7 @@
   ufw:
     rule: allow
     port: '443'
-    protoo: tcp
+    proto: tcp
   when: ansible_distribution == "Debian"
 
 
