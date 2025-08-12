@@ -1,0 +1,9 @@
+---
+
+  - hosts: all
+    become: true
+    vars_files:
+      - user_password.yml
+
+    roles:
+      - users
