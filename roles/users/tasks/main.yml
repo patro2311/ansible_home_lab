@@ -6,7 +6,7 @@
     home: "{{ item.home | default('/home/default') }}"
     group: "{{ item.group }}"
     comment: "{{ item.comment | default('') }}"
-    password: "{{ item.password | hash('sha512') }}"
+    password: "{{ vars[item.password_var]| hash('sha512') }}"
     password_expire_max: "{{ item.password_expire_max }}"
   loop: "{{ standard_user.branch_KE }}"
 
@@ -18,7 +18,7 @@
     home: "{{ item.home | default('/home/default') }}"
     group: "{{ item.group }}"
     comment: "{{ item.comment | default('') }}"
-    password: "{{ item.password | hash('sha512') }}"
+    password: "{{ vars[item.password_var] | hash('sha512') }}"
     password_expire_max: "{{ item.password_expire_max }}"
   loop: "{{ standard_user.branch_ZV }}"
 
