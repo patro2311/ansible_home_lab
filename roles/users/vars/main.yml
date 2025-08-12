@@ -5,7 +5,7 @@ standard_user:
       home: /home/cechovsky
       group: branch_KE
       comment: "Tomas Čechovský"
-      password_var: Tomas_Cechovsky
+      password: "{{ Tomas_Cechovsky }}"
       password_expire_max: 90         
 
     - name: Fero_Zido
@@ -13,7 +13,7 @@ standard_user:
       home: /home/zido
       group: branch_KE
       comment: "František Žido"
-      password_var:  Fero_Zido 
+      password: "{{ Fero_Zido }}"
       password_expire_max: 90
  
     - name: Marian_Nigut
@@ -21,7 +21,7 @@ standard_user:
       shell: /bin/bash
       group: branch_KE 
       comment: "Marian Nigut"
-      password_var: Marian_Nigut 
+      password: "{{ Marian_Nigut }}"
       password_expire_max: 90
 
     - name: Anton_Cruis
@@ -29,7 +29,7 @@ standard_user:
       shell: /bin/bash
       group: branch_KE
       comment: "Anton Cruis"
-      password_var: Anton_Cruis
+      password: "{{ Anton_Cruis }}"
       password_expire_max: 90
    
     - name: Miroslav_Soltes
@@ -37,7 +37,7 @@ standard_user:
       shell: /bin/bash
       group: branch_KE
       comment: "Miroslav Šoltes"
-      password_var: Miroslav_Soltes
+      password: "{{ Miroslav_Soltes }}"
       password_expire_max: 90      
  
   branch_ZV:
@@ -46,7 +46,7 @@ standard_user:
       shell: /bin/bash
       comment: "Radislav Lonagaver"
       group: branch_ZV 
-      password_var: Rado_Longauver 
+      password: "{{ Rado_Longauver }}"
       password_expire_max: 90
 
     - name: Lukas_Longauver
@@ -54,5 +54,5 @@ standard_user:
       shell: /bin/bash
       comment: "Lukáš Lonagaver"
       group: branch_ZV
-      password_var: Lukas_Longauver 
+      password: "{{ Lukas_Longauver }}"
       password_expire_max: 90
