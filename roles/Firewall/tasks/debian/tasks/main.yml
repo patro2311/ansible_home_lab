@@ -8,14 +8,14 @@
   tags: ufw debian ubuntu
   ufw:
     rule: deny
-    direction: incoming
+    direction: in
   when: ansible_distribution == "Debian"
 
 - name: Allow outgoing traffic
   tags: ufw debian ubuntu
   ufw:
     rule: allow
-    direction: outgoing
+    direction: out
   when: ansible_distribution == "Debian" 
 
 
