@@ -1,44 +1,44 @@
 standard_user:
   branch_KE:
-     - name: Tomas_Cechovsky
-       shell: /bin/bash
-       home: /home/cechovsky
-       group: branch_KE
-       comment: "Tomas Čechovský"
-       password_var: Tomas_Cechovsky
-       password_expire_max: 90         
+    - name: Tomas_Cechovsky
+      shell: /bin/bash
+      home: /home/cechovsky
+      group: branch_KE
+      comment: "Tomas Čechovský"
+      password_var: Tomas_Cechovsky
+      password_expire_max: 90         
 
-     - name: Fero_Zido
-       shell: /bin/bash
-       home: /home/zido
-       group: branch_KE
-       comment: "František Žido"
-       password_var:  Fero_Zido 
-       password_expire_max: 90
+    - name: Fero_Zido
+      shell: /bin/bash
+      home: /home/zido
+      group: branch_KE
+      comment: "František Žido"
+      password_var:  Fero_Zido 
+      password_expire_max: 90
  
-     - name: Marian_Nigut
-       home: /home/nigut
-       shell: /bin/bash
-       group: branch_KE 
-       comment: "Marian Nigut"
-       password_var: Marian_Nigut 
-       password_expire_max: 90
+    - name: Marian_Nigut
+      home: /home/nigut
+      shell: /bin/bash
+      group: branch_KE 
+      comment: "Marian Nigut"
+      password_var: Marian_Nigut 
+      password_expire_max: 90
 
-     - name: Anton_Cruis
-       home: /home/cruis
-       shell: /bin/bash
-       group: branch_KE
-       comment: "Anton Cruis"
-       password_var: Anton_Cruis
-       password_expire_max: 90
+    - name: Anton_Cruis
+      home: /home/cruis
+      shell: /bin/bash
+      group: branch_KE
+      comment: "Anton Cruis"
+      password_var: Anton_Cruis
+      password_expire_max: 90
    
-     - name: Miroslav_Soltes
-       home: /home/soltes
-       shell: /bin/bash
-       group: branch_KE
-       comment: "Miroslav Šoltes"
-       password_var: Miroslav_Soltes
-       password_expire_max: 90      
+    - name: Miroslav_Soltes
+      home: /home/soltes
+      shell: /bin/bash
+      group: branch_KE
+      comment: "Miroslav Šoltes"
+      password_var: Miroslav_Soltes
+      password_expire_max: 90      
  
   branch_ZV:
     - name: Rado_Longauver
