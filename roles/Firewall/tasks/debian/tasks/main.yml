@@ -24,6 +24,7 @@
   ufw:
     rule: allow
     name: OpenSSH
+    state: enabled 
   when: ansible_distribution == "Debian"
 
 - name: limit ssh connections 
