@@ -2,13 +2,13 @@
   tags: branch_KE KE ke 
   user:
     name: "{{ item.name }}"
-    shell: "{{ item.shell | default'(omit)' }}"
+    shell: "{{ item.shell | default(omit) }}"
     home: "{{ item.home | default('/home/default') }}"
     group: "{{ item.group }}"
     comment: "{{ item.comment | default('') }}"
-    password: "{{ item.password }}"
+    password: "{{ item.password | hash('sha512') }}"
     password_expire_max: "{{ item.password_expire_max }}"
-  loop: "{{ standard_user[0].branch_KE }}"
+  loop: "{{ standard_user.branch_KE }}"
 
 - name: Create a user for branch_ZV
   tags: branch_ZV ZV zv 
@@ -18,12 +18,12 @@
     home: "{{ item.home | default('/home/default') }}"
     group: "{{ item.group }}"
     comment: "{{ item.comment | default('') }}"
-    password: "{{ item.password }}"
+    password: "{{ item.password | hash('sha512') }}"
     password_expire_max: "{{ item.password_expire_max }}"
-  loop: "{{ standard_user[1].branch_ZV }}"
+  loop: "{{ standard_user.branch_ZV }}"
 
 - name: Force to change password in the frist login 
   tags: change_password
   command: "chage -d 0 {{ item.name }}"
-  loop: "{{ standard_user[1].branch_ZV }}"
+  loop: "{{ standard_user.branch_ZV }}"
   when: item.password_expire_max is defined and item.password_expire_max > 0
