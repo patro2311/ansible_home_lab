@@ -1,33 +1,46 @@
 - name: Set logging
+  tags: ufw debian ubuntu
   ufw:
     logging: on
+  when: ansible_distribution == "Debian"  
 
 - name: Deny all incoming traffic
+  tags: ufw debian ubuntu
   ufw:
     rule: deny
     direction: incoming
+  when: ansible_distribution == "Debian"
 
 - name: Allow outgoing traffic
+  tags: ufw debian ubuntu
   ufw:
     rule: allow
     direction: outgoing
-   
+  when: ansible_distribution == "Debian" 
+
+
 - name: allow SSH 
+  tags: ufw debian ubuntu
   ufw:
     rule: allow
     name: OpenSSH
+  when: ansible_distribution == "Debian"
 
 - name: limit ssh connections 
+  tags: ufw debian ubuntu
   ufw:
     rule: limit 
     port: '22'
     proto: tcp 
+  when: ansible_distribution == "Debian"
      
 - name: Allow HTTPS   
+  tags: ufw debian ubuntu
   ufw:
     rule: allow
     port: '443'
     protoo: tcp
+  when: ansible_distribution == "Debian"
 
 
   

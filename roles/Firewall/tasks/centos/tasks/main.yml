@@ -3,7 +3,7 @@
     service: "{{ item }}" 
     permanent: true
     state: enabled
-  when: ansible_facts['distribution'] == 'CentOS'
+  when: ansible_distribution == "CentOS"
   loop: 
     - ssh 
     - https   
@@ -16,4 +16,4 @@
   loop:
     - 8080/tcp
     - 443/tcp
-  when?: ansible_facts['distribution'] == 'CentOS'
+  when: ansible_distribution == "CentOS"
