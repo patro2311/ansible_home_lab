@@ -6,4 +6,5 @@
       - user_password.yml
 
     roles:
+      - group
       - users

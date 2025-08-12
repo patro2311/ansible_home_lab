@@ -1,0 +1,11 @@
+- name: Create a group for branch_KE
+  tags: branch_KE KE ke 
+  group:
+    name: branch_KE
+    state: present
+
+- name: Create a group for branch_ZV
+  tags: branch_ZV ZV zv 
+  group:
+    name: branch_ZV
+    state: present 
